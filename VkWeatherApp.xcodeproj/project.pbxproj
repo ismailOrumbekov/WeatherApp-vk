@@ -19,6 +19,9 @@
 		8D18E8012C8A45F000EC23AE /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8002C8A45F000EC23AE /* BaseView.swift */; };
 		8D18E8042C8A46F500EC23AE /* WeatherHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8032C8A46F500EC23AE /* WeatherHeaderView.swift */; };
 		8D18E8072C8A478D00EC23AE /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 8D18E8062C8A478D00EC23AE /* SnapKit */; };
+		8D18E8092C8A531E00EC23AE /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8082C8A531E00EC23AE /* Resources.swift */; };
+		8D18E80B2C8A53A100EC23AE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E80A2C8A53A100EC23AE /* Extensions.swift */; };
+		8D18E80D2C8A58E300EC23AE /* ExpectedWeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E80C2C8A58E300EC23AE /* ExpectedWeatherCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +57,9 @@
 		8D18E7FD2C8A451600EC23AE /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		8D18E8002C8A45F000EC23AE /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		8D18E8032C8A46F500EC23AE /* WeatherHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherHeaderView.swift; sourceTree = "<group>"; };
+		8D18E8082C8A531E00EC23AE /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		8D18E80A2C8A53A100EC23AE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		8D18E80C2C8A58E300EC23AE /* ExpectedWeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpectedWeatherCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,7 +111,7 @@
 		8D18E7C82C8A41FF00EC23AE /* VkWeatherApp */ = {
 			isa = PBXGroup;
 			children = (
-				8D18E7FC2C8A436300EC23AE /* Helpers */,
+				8D18E7FC2C8A436300EC23AE /* Resources */,
 				8D18E7FB2C8A432E00EC23AE /* Application */,
 				8D18E7F92C8A42B100EC23AE /* Controllers */,
 			);
@@ -157,13 +163,15 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		8D18E7FC2C8A436300EC23AE /* Helpers */ = {
+		8D18E7FC2C8A436300EC23AE /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				8D18E7D22C8A420100EC23AE /* Assets.xcassets */,
 				8D18E7D42C8A420100EC23AE /* LaunchScreen.storyboard */,
+				8D18E8082C8A531E00EC23AE /* Resources.swift */,
+				8D18E80A2C8A53A100EC23AE /* Extensions.swift */,
 			);
-			path = Helpers;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		8D18E7FF2C8A45E100EC23AE /* Base */ = {
@@ -179,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				8D18E8032C8A46F500EC23AE /* WeatherHeaderView.swift */,
+				8D18E80C2C8A58E300EC23AE /* ExpectedWeatherCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -321,6 +330,9 @@
 			files = (
 				8D18E7CE2C8A41FF00EC23AE /* WeatherViewController.swift in Sources */,
 				8D18E7FE2C8A451600EC23AE /* BaseViewController.swift in Sources */,
+				8D18E8092C8A531E00EC23AE /* Resources.swift in Sources */,
+				8D18E80D2C8A58E300EC23AE /* ExpectedWeatherCell.swift in Sources */,
+				8D18E80B2C8A53A100EC23AE /* Extensions.swift in Sources */,
 				8D18E8012C8A45F000EC23AE /* BaseView.swift in Sources */,
 				8D18E7CA2C8A41FF00EC23AE /* AppDelegate.swift in Sources */,
 				8D18E8042C8A46F500EC23AE /* WeatherHeaderView.swift in Sources */,
@@ -499,7 +511,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VkWeatherApp/Info.plist;
+				INFOPLIST_FILE = VkWeatherApp/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -525,7 +537,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = VkWeatherApp/Info.plist;
+				INFOPLIST_FILE = VkWeatherApp/Application/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

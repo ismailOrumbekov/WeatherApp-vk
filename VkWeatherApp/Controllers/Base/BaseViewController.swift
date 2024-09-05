@@ -11,7 +11,7 @@ import UIKit
 
 class BaseViewController: UIViewController{
     override func viewDidLoad() {
-        <#code#>
+        setUpUI()
     }
 }
 
