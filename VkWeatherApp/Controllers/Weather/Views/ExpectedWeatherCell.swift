@@ -23,7 +23,7 @@ class ExpectedWeatherCell: UICollectionViewCell {
     let iconImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
-        imageView.tintColor = .yellow
+        imageView.tintColor = .white
         return imageView
     }()
     
@@ -48,7 +48,7 @@ class ExpectedWeatherCell: UICollectionViewCell {
     func configure(time: String, iconName: String, temperature: String) {
         timeLabel.text = time
         iconImageView.image = UIImage(systemName: iconName)
-        tempLabel.text = temperature
+        tempLabel.text = "\(temperature)°"
     }
 }
 

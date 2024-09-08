@@ -41,7 +41,7 @@ class WeatherHeaderView: BaseView{
        let label = UILabel()
        label.textColor = .white
        label.font = UIFont.systemFont(ofSize: 20)
-        label.text = "Sunny"
+       label.text = "Sunny"
        return label
         
     }()
@@ -50,7 +50,7 @@ class WeatherHeaderView: BaseView{
     private lazy var horizontalStackView: UIStackView = {
         let stackView = UIStackView()
         stackView.axis = .horizontal
-        stackView.spacing = 5
+        stackView.spacing = 8
         
         return stackView
     }()
@@ -80,7 +80,8 @@ class WeatherHeaderView: BaseView{
         stackView.axis = .vertical
         stackView.alignment = .center
         stackView.spacing = 15
-        stackView.backgroundColor = Resources.Colors.block
+        stackView.layer.borderWidth = 2
+        stackView.layer.borderColor = Resources.Colors.block.cgColor
         stackView.alignment = .leading
         
         stackView.isLayoutMarginsRelativeArrangement = true
@@ -103,28 +104,20 @@ class WeatherHeaderView: BaseView{
     private lazy var collectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = 16
-            layout.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
+            layout.minimumLineSpacing = 15
+
             let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collectionView.backgroundColor = .clear
             collectionView.isScrollEnabled = true
             collectionView.isUserInteractionEnabled = true
-            collectionView.alwaysBounceVertical = true
+            collectionView.backgroundColor = .clear
+            collectionView.contentInset = .zero
 
-            collectionView.showsHorizontalScrollIndicator = false
+            collectionView.register(ExpectedWeatherCell.self, forCellWithReuseIdentifier: ExpectedWeatherCell.id)
+            
             return collectionView
         }()
     
-    let weatherData: [(time: String, icon: String, temp: String)] = [
-            ("Now", "sun.max.fill", "76°"),
-            ("10AM", "sun.max.fill", "77°"),
-            ("11AM", "sun.max.fill", "77°"),
-            ("12PM", "sun.max.fill", "77°"),
-            ("12PM", "sun.max.fill", "77°"),
-            ("12PM", "sun.max.fill", "77°"),
-            ("12PM", "sun.max.fill", "77°"),
-            ("2PM", "sun.max.fill", "79°")
-             ]
+    var weatherData: DailyWeatherForecast?
     
     
 }
@@ -143,25 +136,25 @@ extension WeatherHeaderView{
             
             addSubview(expectedWeatherStackView)
             expectedWeatherStackView.addArrangedSubview(expWeatherLabel)
-            addSubview(collectionView)
+            expectedWeatherStackView.addArrangedSubview(collectionView)
         }
         override func setUpConstraints(){
             super.setUpConstraints()
             verticalStackView.snp.makeConstraints { make in
-                make.width.equalToSuperview().multipliedBy(0.9)
-                make.center.equalToSuperview()
+                make.width.equalToSuperview()
+                make.top.equalToSuperview()
+                make.centerX.equalToSuperview()
                 
             }
             
             expectedWeatherStackView.snp.makeConstraints { make in
-                make.width.equalToSuperview().multipliedBy(0.95)
+                make.width.equalToSuperview()
                 make.centerX.equalToSuperview()
                 make.top.equalTo(verticalStackView.snp.bottom).offset(30)
             }
             
             collectionView.snp.makeConstraints { make in
-                make.top.equalTo(expectedWeatherStackView.snp.bottom).offset(20)
-                make.centerX.equalToSuperview()
+                
                 make.width.equalToSuperview().multipliedBy(0.9)
                 make.height.equalTo(100)
             }
@@ -172,28 +165,41 @@ extension WeatherHeaderView{
             super.configuration()
             collectionView.delegate = self
             collectionView.dataSource = self
-            collectionView.register(ExpectedWeatherCell.self, forCellWithReuseIdentifier: ExpectedWeatherCell.id)
                    
         }
+    
+    
+    
+    func setData(weatherData: DailyWeatherForecast){
+        self.weatherData = weatherData
+        cityLabel.text = weatherData.cityName
+        degreesLabel.text = "\( weatherData.formattedTempC)°"
+        weatherLabel.text = weatherData.condition
+        minLabel.text = "Minimum: \(formatTemp(weatherData.minTempC))°"
+        maxLabel.text = "Maximum: \(formatTemp(weatherData.maxTempC))°"
+        
+        collectionView.reloadData()
+    }
 }
 
 
 extension WeatherHeaderView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return weatherData.count
+        return weatherData?.hourlyTemps.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ExpectedWeatherCell.id, for: indexPath) as! ExpectedWeatherCell
-        let data = weatherData[indexPath.item]
-        cell.configure(time: data.time, iconName: data.icon, temperature: data.temp)
+        guard let data = weatherData?.hourlyTemps[indexPath.row] else {return UICollectionViewCell()}
+        cell.configure(time: data.getTime(), iconName: data.iconName, temperature: "\(data.formattedTempC)")
+        
         return cell
     }
     
     // MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 80, height: 100)
+        return CGSize(width: 60, height: 100)
     }
 }
