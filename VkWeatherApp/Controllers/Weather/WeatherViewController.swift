@@ -13,16 +13,16 @@ class WeatherViewController: BaseViewController {
     let locationManager = CLLocationManager()
     
     
-    private lazy var searchBar: UISearchBar = {
-       let searchBar = UISearchBar()
-        
-        searchBar.isTranslucent = true
-        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
-        searchBar.barTintColor = .white
-        
-        searchBar.placeholder = "Write any city"
-        
-        return searchBar
+    private lazy var searchBar: CustomSearchBar = {
+        let searchBar = CustomSearchBar()
+            
+            searchBar.isTranslucent = true
+            searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
+            searchBar.barTintColor = .white
+            
+            searchBar.placeholder = "Write any city"
+            searchBar.delegate = self
+            return searchBar
     }()
 
     private var headerView : WeatherHeaderView = {
@@ -75,7 +75,7 @@ extension WeatherViewController{
           
           tableView.snp.makeConstraints { make in
               make.width.equalToSuperview().multipliedBy(0.9)
-              make.height.equalToSuperview()
+              make.height.equalToSuperview().multipliedBy(0.9)
               make.top.equalTo(searchBar.snp.bottom).offset(30)
               make.centerX.equalToSuperview()
           }
@@ -90,21 +90,19 @@ extension WeatherViewController{
           tableView.delegate = self
           tableView.dataSource = self
           tableView.tableHeaderView = headerView
-          
-          
-          
-          
-          
-          
-         
+          view.backgroundColor = .black
 
-          
-          
+        
       }
     
 
-}
+    }
 
+
+
+
+
+//MARK: TableView set ups
 
 extension WeatherViewController: UITableViewDelegate, UITableViewDataSource{
     
@@ -133,6 +131,10 @@ extension WeatherViewController: UITableViewDelegate, UITableViewDataSource{
 }
 
 
+
+
+//MARK: Locations Set up
+
 extension WeatherViewController: CLLocationManagerDelegate{
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         manager.stopUpdatingHeading()
@@ -140,19 +142,35 @@ extension WeatherViewController: CLLocationManagerDelegate{
             let lat = location.coordinate.latitude
             let lon = location.coordinate.longitude
             let locationString = "\(lat),\(lon)"
-
-            WeatherManager.shared.fetchWeather(for: locationString) { dailyWeatherList in
-                self.weatherData = dailyWeatherList
-                self.tableView.reloadData()
-                self.headerView.setData(weatherData: dailyWeatherList[0])
-            }        }
+            
+            fetchWeather(locationString: locationString)
+        }
     }
     
-    
-   
-    
-    //Works only if there were problems with request location
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("smthwrong")
     }
+}
+
+
+
+
+//MARK: SearchBar set up
+
+extension WeatherViewController: UISearchBarDelegate{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+            guard let searchText = searchBar.text, !searchText.isEmpty else { return }
+        
+            fetchWeather(locationString: searchText)
+            searchBar.resignFirstResponder()
+        }
+    
+    func fetchWeather(locationString: String){
+        WeatherManager.shared.fetchWeather(for: locationString) { dailyWeatherList in
+            self.weatherData = dailyWeatherList
+            self.tableView.reloadData()
+            self.headerView.setData(weatherData: dailyWeatherList[0])
+        }
+    }
+
 }

@@ -26,6 +26,7 @@
 		8D18E8132C8DBC1700EC23AE /* WeatherManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8122C8DBC1700EC23AE /* WeatherManager.swift */; };
 		8D18E8152C8DF40A00EC23AE /* CurrentWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8142C8DF40A00EC23AE /* CurrentWeather.swift */; };
 		8D18E8172C8E1E9000EC23AE /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8162C8E1E9000EC23AE /* LocationManager.swift */; };
+		8D18E8192C8E2DF600EC23AE /* CustomSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D18E8182C8E2DF600EC23AE /* CustomSearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +69,7 @@
 		8D18E8122C8DBC1700EC23AE /* WeatherManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherManager.swift; sourceTree = "<group>"; };
 		8D18E8142C8DF40A00EC23AE /* CurrentWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWeather.swift; sourceTree = "<group>"; };
 		8D18E8162C8E1E9000EC23AE /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		8D18E8182C8E2DF600EC23AE /* CustomSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -199,6 +201,7 @@
 				8D18E8032C8A46F500EC23AE /* WeatherHeaderView.swift */,
 				8D18E80C2C8A58E300EC23AE /* ExpectedWeatherCell.swift */,
 				8D18E80E2C8D892D00EC23AE /* WeatherTableCell.swift */,
+				8D18E8182C8E2DF600EC23AE /* CustomSearchBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,6 +359,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8D18E8192C8E2DF600EC23AE /* CustomSearchBar.swift in Sources */,
 				8D18E7CE2C8A41FF00EC23AE /* WeatherViewController.swift in Sources */,
 				8D18E7FE2C8A451600EC23AE /* BaseViewController.swift in Sources */,
 				8D18E8092C8A531E00EC23AE /* Resources.swift in Sources */,
