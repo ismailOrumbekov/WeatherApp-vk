@@ -8,6 +8,20 @@
 import UIKit
 import CoreLocation
 
+
+class dog{
+    func hui(){
+        print("hui")
+    }
+}
+
+class sobaka: dog{
+    func am(){
+        print("hello")
+    }
+}
+
+
 class WeatherViewController: BaseViewController {
     private var weatherData: [DailyWeatherForecast] = []
     let locationManager = CLLocationManager()
@@ -56,9 +70,17 @@ class WeatherViewController: BaseViewController {
 extension WeatherViewController{
     
     override func addViews(){
+        
           super.addViews()
         view.addSubview(tableView)
         view.addSubview(searchBar)
+        
+        let dogi: dog = sobaka()
+        
+        
+        if let hui = dogi as dog?{
+            print("amamsfasf")
+        }
       }
     
       override func setUpConstraints(){
